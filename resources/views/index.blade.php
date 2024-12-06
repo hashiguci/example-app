@@ -12,6 +12,8 @@
     <div class="d-flex justify-content-center">
         @auth
             <a href="{{ route('dashboard') }}" class="btn btn-primary mx-2">ダッシュボード</a>
+        @else
+            <a href="{{ route('register') }}" class="btn btn-outline-primary mx-2">ユーザー登録</a>
         @endauth
     </div>
 @endsection
