@@ -14,6 +14,7 @@
             <a href="{{ route('dashboard') }}" class="btn btn-primary mx-2">ダッシュボード</a>
         @else
             <a href="{{ route('register') }}" class="btn btn-outline-primary mx-2">ユーザー登録</a>
+            <a href="{{ route('login') }}" class="btn btn-outline-primary mx-2">ログイン</a>
         @endauth
     </div>
 @endsection
