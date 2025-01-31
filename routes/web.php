@@ -8,19 +8,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/dashboard', [HomeController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 });
 
-// Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
-Route::middleware('guest')->group(function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
-
+Route::middleware('custom.guest')->group(function () {
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 });
 
 Route::post('register', [RegisterController::class, 'register']);
 
+Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::middleware('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('admin.index');
+    });
+});
+
+Route::middleware('authenticated')->group(function () {
+    Route::get('profile', function () {
+        return view('profile');
+    })->name('profile');
+});

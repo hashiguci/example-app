@@ -13,6 +13,9 @@
             min-height: 100vh;
             background-color: #f8f9fa;
         }
+        body.admin {
+            background-color: #f0f7ff;
+        }
         .container {
             max-width: 500px;
             padding: 20px;
@@ -20,12 +23,16 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .admin .container {
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(13, 110, 253, 0.2);
+        }
         .form-label {
             font-weight: bold;
         }
     </style>
 </head>
-<body>
+<body class="{{ Auth::guard('admin')->check() ? 'admin' : '' }}">
     <div class="container">
         @yield('content')
     </div>
